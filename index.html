@@ -453,7 +453,170 @@
   .hero-flavor { animation: fadeUp 0.5s 0.05s both; }
   .hero-title { animation: fadeUp 0.6s 0.15s both; }
   .hero-bottom { animation: fadeUp 0.6s 0.35s both; }
+
+  /* ============================= */
+  /* RESPONSIVE - TABLET (<= 900px) */
+  /* ============================= */
+  @media (max-width: 900px) {
+    nav { padding: 0.9rem 1.5rem; }
+    .logo { font-size: 1.25rem; }
+    .logo-flavor { display: none; }
+    nav ul a { padding: 0.5rem 0.9rem; font-size: 0.55rem; letter-spacing: 0.12em; }
+
+    .hero { padding: 6rem 1.5rem 3rem; }
+    .hero-title { font-size: clamp(4rem, 20vw, 9rem); }
+
+    .big-num { right: 1.5rem; font-size: clamp(3rem, 14vw, 6rem); }
+
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat { padding: 2rem 1.5rem; }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 3px solid var(--black); }
+
+    .about { grid-template-columns: 1fr; }
+    .about-left {
+      padding: 4rem 1.75rem;
+      border-right: none;
+      border-bottom: 4px solid var(--black);
+    }
+    .about-right { grid-template-columns: 1fr 1fr; }
+    .feat { min-height: 140px; padding: 2rem 1.5rem; }
+
+    .email-section { padding: 5rem 1.5rem; }
+    .email-bg-text { font-size: 40vw; }
+
+    footer { padding: 1.75rem 1.5rem; }
+  }
+
+  /* ============================= */
+  /* RESPONSIVE - MOBILE (<= 600px) */
+  /* ============================= */
+  @media (max-width: 600px) {
+    nav {
+      padding: 0.8rem 1rem;
+      flex-wrap: nowrap;
+    }
+    .logo { font-size: 1.1rem; }
+    nav ul { gap: 0; }
+    nav ul li:first-child { border-left: none; }
+    nav ul a {
+      padding: 0.6rem 0.7rem;
+      font-size: 0.5rem;
+      letter-spacing: 0.1em;
+    }
+
+    .hero {
+      min-height: 100vh;
+      min-height: 100svh;
+      padding: 5.5rem 1.25rem 2.5rem;
+    }
+    .hero-flavor { font-size: 0.95rem; margin-bottom: 0.75rem; }
+    .hero-title { font-size: clamp(4.5rem, 26vw, 7rem); line-height: 0.9; }
+
+    .hero-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .hero-desc {
+      font-size: 0.7rem;
+      line-height: 1.9;
+      max-width: 100%;
+    }
+    .hero-badge {
+      width: 100%;
+      text-align: center;
+      padding: 1rem 1.5rem;
+      font-size: 0.65rem;
+    }
+
+    .big-num {
+      font-size: 4.5rem;
+      right: 1rem;
+      top: auto;
+      bottom: 1rem;
+      transform: none;
+      opacity: 0.07;
+    }
+
+    .ticker { padding: 0.75rem 0; }
+    .ticker-inner { font-size: 0.6rem; letter-spacing: 0.2em; }
+
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat { padding: 1.75rem 1.25rem; }
+    .stat-n { font-size: clamp(2.25rem, 9vw, 3rem); }
+    .stat-l { font-size: 0.5rem; letter-spacing: 0.15em; }
+
+    .about-left { padding: 3.5rem 1.25rem; }
+    .about-title { font-size: clamp(2rem, 8vw, 2.6rem); }
+    .about-body { font-size: 1rem; line-height: 1.75; }
+
+    .about-right { grid-template-columns: 1fr 1fr; }
+    .feat { min-height: 120px; padding: 1.5rem 1.25rem; }
+    .feat-n { font-size: 2rem; }
+    .feat-label { font-size: 0.52rem; letter-spacing: 0.15em; }
+
+    .email-section { padding: 4rem 1.25rem; }
+    .email-bg-text { font-size: 50vw; }
+    .email-title { font-size: clamp(2.25rem, 11vw, 3.5rem); }
+    .email-sub { font-size: 1rem; margin-bottom: 2rem; }
+
+    .email-form {
+      flex-direction: column;
+      max-width: 100%;
+    }
+    .email-input {
+      padding: 1.1rem 1.2rem;
+      font-size: 1rem; /* 16px avoids iOS zoom on focus */
+      border-bottom: 3px solid var(--black);
+      width: 100%;
+    }
+    .email-btn {
+      padding: 1.1rem 1.5rem;
+      font-size: 0.62rem;
+      width: 100%;
+    }
+    .success-msg {
+      max-width: 100%;
+      font-size: 0.62rem;
+    }
+
+    footer {
+      flex-direction: column;
+      gap: 0.8rem;
+      text-align: center;
+      padding: 1.75rem 1.25rem;
+    }
+    .footer-logo { font-size: 1.1rem; }
+    .footer-copy { font-size: 0.5rem; }
+  }
+
+  /* ============================= */
+  /* RESPONSIVE - SMALL (<= 380px)  */
+  /* ============================= */
+  @media (max-width: 380px) {
+    nav { padding: 0.7rem 0.85rem; }
+    nav ul a { padding: 0.55rem 0.55rem; font-size: 0.45rem; }
+    .logo { font-size: 1rem; }
+
+    .hero { padding: 5rem 1rem 2.25rem; }
+    .hero-title { font-size: 4rem; }
+
+    .stat { padding: 1.5rem 1rem; }
+    .about-left { padding: 3rem 1rem; }
+    .feat { padding: 1.25rem 1rem; min-height: 110px; }
+    .email-section { padding: 3.5rem 1rem; }
+  }
+
+  /* Prefers reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-inner { animation: none; }
+    .hero-flavor, .hero-title, .hero-bottom { animation: none; }
+    html { scroll-behavior: auto; }
+  }
 </style>
+
 </head>
 
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
