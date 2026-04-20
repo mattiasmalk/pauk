@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAUK Hard Seltzer</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --yellow: #e8ff00;
+    --black: #0d0d0d;
+    --white: #ffffff;
+    --yellow-dark: #c9dd00;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--black);
+    font-family: 'Unbounded', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.1rem 2.5rem;
+    background: var(--yellow);
+    border-bottom: 3px solid var(--black);
+  }
+
+  .logo {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    color: var(--black);
+    text-decoration: none;
+  }
+
+  .logo-flavor {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    color: var(--black);
+    opacity: 0.6;
+    margin-left: 6px;
+  }
+
+  nav ul { list-style: none; display: flex; gap: 0; }
+  nav ul li { border-left: 2px solid var(--black); }
+  nav ul a {
+    display: block;
+    color: var(--black);
+    text-decoration: none;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.5rem 1.2rem;
+    transition: background 0.15s;
+  }
+  nav ul a:hover { background: var(--black); color: var(--yellow); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--yellow);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 7rem 2.5rem 4rem;
+    border-bottom: 4px solid var(--black);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-flavor {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--black);
+    opacity: 0.55;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-title {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900;
+    font-size: clamp(5.5rem, 18vw, 16rem);
+    line-height: 0.85;
+    letter-spacing: -0.03em;
+    color: var(--black);
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-title-outline {
+    -webkit-text-stroke: 3px var(--black);
+    color: transparent;
+    display: block;
+  }
+
+  .hero-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 3rem;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-desc {
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--black);
+    opacity: 0.65;
+    max-width: 260px;
+    line-height: 2.2;
+  }
+
+  .hero-badge {
+    background: var(--black);
+    color: var(--yellow);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.9rem 1.8rem;
+    border: 3px solid var(--black);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .hero-badge:hover { background: var(--white); color: var(--black); }
+
+  .big-num {
+    font-size: clamp(4rem, 10vw, 8rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--black);
+    opacity: 0.08;
+    position: absolute;
+    right: 2.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* TICKER */
+  .ticker {
+    background: var(--black);
+    color: var(--yellow);
+    padding: 0.9rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+    border-bottom: 2px solid var(--yellow);
+  }
+
+  .ticker-inner {
+    display: inline-block;
+    animation: ticker 18s linear infinite;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* STATS */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: var(--white);
+    border-bottom: 4px solid var(--black);
+  }
+
+  .stat {
+    padding: 2.5rem 2rem;
+    border-right: 3px solid var(--black);
+    position: relative;
+  }
+  .stat:last-child { border-right: none; }
+
+  .stat-n {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: var(--black);
+    line-height: 1;
+  }
+
+  .stat-unit {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .stat-l {
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--black);
+    opacity: 0.45;
+    margin-top: 0.5rem;
+  }
+
+  /* ABOUT */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 70vh;
+  }
+
+  .about-left {
+    background: var(--yellow);
+    padding: 5rem 3rem;
+    border-right: 4px solid var(--black);
+    border-bottom: 4px solid var(--black);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .section-tag {
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--black);
+    opacity: 0.5;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .section-tag::before {
+    content: '';
+    display: block;
+    width: 24px; height: 2px;
+    background: var(--black);
+    opacity: 0.4;
+  }
+
+  .about-title {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--black);
+    margin-bottom: 1.8rem;
+  }
+
+  .about-body {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--black);
+    opacity: 0.7;
+  }
+
+  .about-right {
+    background: var(--black);
+    border-bottom: 4px solid var(--black);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .feat {
+    padding: 2.5rem 2rem;
+    border-right: 2px solid rgba(232,255,0,0.12);
+    border-bottom: 2px solid rgba(232,255,0,0.12);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 180px;
+    transition: background 0.2s;
+  }
+  .feat:hover { background: rgba(232,255,0,0.06); }
+  .feat:nth-child(2), .feat:nth-child(4) { border-right: none; }
+  .feat:nth-child(3), .feat:nth-child(4) { border-bottom: none; }
+
+  .feat-n {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--yellow);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .feat-label {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    opacity: 0.45;
+  }
+
+  /* EMAIL */
+  .email-section {
+    background: var(--yellow);
+    padding: 7rem 2.5rem;
+    border-top: 4px solid var(--black);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .email-bg-text {
+    position: absolute;
+    font-size: 28vw;
+    font-weight: 900;
+    color: rgba(0,0,0,0.06);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    letter-spacing: -0.04em;
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  .email-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+  }
+
+  .email-tag { margin-bottom: 1.5rem; }
+
+  .email-title {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.5rem, 7vw, 6rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--black);
+    margin-bottom: 1.5rem;
+  }
+
+  .email-title span {
+    -webkit-text-stroke: 2px var(--black);
+    color: transparent;
+    display: block;
+  }
+
+  .email-sub {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--black);
+    opacity: 0.6;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+
+  .email-form {
+    display: flex;
+    max-width: 520px;
+    border: 3px solid var(--black);
+    overflow: hidden;
+  }
+
+  .email-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--black);
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    padding: 1.1rem 1.4rem;
+    outline: none;
+  }
+  .email-input::placeholder { color: rgba(0,0,0,0.3); }
+
+  .email-btn {
+    background: var(--black);
+    color: var(--yellow);
+    border: none;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 1.1rem 1.8rem;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .email-btn:hover { background: var(--white); color: var(--black); }
+
+  .success-msg {
+    display: none;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--black);
+    margin-top: 1.2rem;
+    padding: 1rem 1.4rem;
+    border: 3px solid var(--black);
+    max-width: 520px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    padding: 2rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 3px solid var(--yellow);
+  }
+
+  .footer-logo {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900;
+    font-size: 1.2rem;
+    letter-spacing: -0.02em;
+    color: var(--yellow);
+  }
+
+  .footer-copy {
+    font-size: 0.55rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-flavor { animation: fadeUp 0.5s 0.05s both; }
+  .hero-title { animation: fadeUp 0.6s 0.15s both; }
+  .hero-bottom { animation: fadeUp 0.6s 0.35s both; }
+</style>
+</head>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init("yJMuLYTDzdFtJ674g");
+  })();
+</script>
+
+<body>
+
+<nav>
+  <a href="#" class="logo">PAUK</a>
+  <ul>
+    <li><a href="#about">Meist</a></li>
+    <li><a href="#email">Saa pauku</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="home">
+  <p class="hero-flavor">Hard Seltzer 4.5%</p>
+  <div class="hero-title">
+    PAUK
+  </div>
+  <div class="big-num">4.5%</div>
+  <div class="hero-bottom">
+    <p class="hero-desc">Pauk käib, jutt muutub.</p>
+    <button class="hero-badge" onclick="document.getElementById('email').scrollIntoView({behavior:'smooth'})">Saa pauku →</button>
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    PAUK HARD SELTZER &nbsp;·&nbsp; LAIMI &nbsp;·&nbsp; 4.5% alc &nbsp;·&nbsp; ZERO SUGAR &nbsp;·&nbsp; LOW CAL &nbsp;·&nbsp; PAUK HARD SELTZER &nbsp;·&nbsp; LAIMI &nbsp;·&nbsp; 4.5% alc &nbsp;·&nbsp; ZERO SUGAR &nbsp;·&nbsp; LOW CAL &nbsp;·&nbsp; PAUK HARD SELTZER &nbsp;·&nbsp; LAIMI &nbsp;·&nbsp; 4.5% alc &nbsp;·&nbsp; ZERO SUGAR &nbsp;·&nbsp; LOW CAL &nbsp;·&nbsp;
+  </div>
+</div>
+
+<div class="stats">
+    <div class="stat">
+    <div class="stat-n">110<span class="stat-unit"></span></div>
+    <div class="stat-l">kcal</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">4.5<span class="stat-unit">%</span></div>
+    <div class="stat-l">alc</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">0<span class="stat-unit">g</span></div>
+    <div class="stat-l">Suhkur</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">🍋</div>
+    <div class="stat-l">Laimi maitse</div>
+  </div>
+</div>
+
+<section class="about" id="about">
+  <div class="about-left">
+    <p class="section-tag">Mis on PAUK?</p>
+    <h2 class="about-title">Kräki.<br>Limpsi.<br>Pane edasi.</h2>
+    <p class="about-body">PAUK on hard seltzer.
+        See tähendab: mullivesi, alkohol ja maitse.
+        Mingit magusat siirupit ei ole.</p>
+  </div>
+  <div class="about-right">
+    <div class="feat">
+      <div class="feat-n">110</div>
+      <div class="feat-label">kcal</div>
+    </div>
+    <div class="feat">
+      <div class="feat-n">0g</div>
+      <div class="feat-label">Suhkur</div>
+    </div>
+    <div class="feat">
+      <div class="feat-n">4.5%</div>
+      <div class="feat-label">alc</div>
+    </div>
+    <div class="feat">
+      <div class="feat-n">🍋</div>
+      <div class="feat-label">Laimi maitse</div>
+    </div>
+  </div>
+</section>
+
+<section class="email-section" id="email">
+  <div class="email-bg-text">PAUK</div>
+  <div class="email-inner">
+    <p class="section-tag email-tag">Ole esimene</p>
+    <h2 class="email-title">Ära jää<br><span>tulekust ilma.</span></h2>
+    <p class="email-sub">Jäta oma e-mail. Anname teada, kui PAUK tuleb.</p>
+    <div class="email-form">
+      <input type="email" class="email-input" placeholder="sinu@email.com" id="emailInput">
+      <button class="email-btn" onclick="handleSubmit()">Tahan pauku →</button>
+    </div>
+    <div class="success-msg" id="successMsg">✓ &nbsp; Oled listis. Näeme!</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">PAUK</div>
+  <div class="footer-copy">© 2026 PAUK Hard Seltzer</div>
+</footer>
+
+
+<script>
+function handleSubmit() {
+  const input = document.getElementById('emailInput');
+  const msg = document.getElementById('successMsg');
+  const val = input.value.trim();
+
+  if (!val || !val.includes('@')) {
+    input.style.outline = '2px solid red';
+    setTimeout(() => { input.style.outline = 'none'; }, 1500);
+    return;
+  }
+
+  // 👉 EMAILI SAATMINE
+  emailjs.send("service_pqcq1g3", "template_9521zwf", {
+    email: val
+  }).then(() => {
+    document.querySelector('.email-form').style.display = 'none';
+    msg.style.display = 'block';
+  }).catch(err => {
+    console.error(err);
+    alert("Midagi läks pekki. Proovi uuesti.");
+  });
+}
+
+document.getElementById('emailInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') handleSubmit();
+});
+</script>
+
+</body>
+</html>
